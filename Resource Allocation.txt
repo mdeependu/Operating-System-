@@ -1,0 +1,147 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<stdbool.h>
+
+void calc(int n,int nr);
+void print_mat(int n,int nr,int A[n][nr]);
+
+
+
+int main()
+{
+	int n,nr;
+	printf("Enter number of processes:");
+	scanf("%d",&n);
+    printf("enter number of resourse");
+    scanf("%d",&nr);
+
+	calc(n,nr);
+
+
+}
+void print_mat(int n,int nr,int A[n][nr])
+{
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<nr;j++)
+        {
+            printf("%d",A[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void calc(int n,int nr)
+{
+    //left resource
+    int left[nr];
+    for(int i=0;i<nr;i++)
+    {
+        printf("enter left resource:");
+        scanf("%d",&left[i]);
+    }
+
+    //max matrix
+    int max_array[n][nr];
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<nr;j++)
+        {
+            printf("enter maximum need of %d process",i);
+            scanf("%d",&max_array[i][j]);
+            printf("\n");
+        }
+    }
+
+    print_mat(n,nr,max_array);
+
+    //allocated matrix
+    int allocated_mat[n][nr];
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<nr;j++)
+        {
+            printf("enter no. allocated resource of %d process",i);
+            scanf("%d",&allocated_mat[i][j]);
+            printf("\n");
+            if(allocated_mat[i][j]<=max_array[i][j])
+            {
+                continue;
+            }
+            else
+            {
+                printf("entered allocated resource is wrong\n");
+            }
+
+        }
+    }
+    print_mat(n,nr,allocated_mat);
+
+    //remaining matrix
+    int remain_mat[n][nr];
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<nr;j++)
+        {
+            remain_mat[i][j]= max_array[i][j]-allocated_mat[i][j];
+        }
+    }
+    print_mat(n,nr,remain_mat);
+
+    //calculation
+    int counter;
+    int c=-1;
+    int cc=0;
+    int temp[nr];
+    int i=0;
+    while (true)
+    {
+        if(c!=i && counter<n)
+        {
+            for( i =0;i<n;i++)
+            {
+                for(int j=0;j<nr;j++)
+                {
+                    temp[j]=left[j]-remain_mat[i][j];
+                    cc++;
+                    if(temp[j]<0)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        if(cc==nr)
+                        {
+                            c=i;
+                            printf("P%d",i);
+                            for(int a=0;a<nr;a++)
+                            {
+                                left[a]=left[a]-remain_mat[i][a];
+                                left[a]=left[a]+max_array[i][a];
+
+                            }
+                        }
+                    }
+
+
+
+                }
+
+            }
+        }
+        else
+        {
+            continue;
+        }
+        if(counter==n)
+        {
+            break;
+        }
+
+
+    }
+
+
+
+}

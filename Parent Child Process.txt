@@ -1,0 +1,17 @@
+#include<stdio.h>
+
+char *message = "How are you";
+
+int main ()
+{char store [50];
+int p[2];
+pipe(p);
+if (fork() != 0)
+{write(p[1],message,strlen(message)+1);
+}
+else
+{read(p[0],store,50);
+printf("Hello %s\n",store);
+}
+return 0;
+}

@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1599719792 source:c:\users\deependu mandal\desktop\semester 3\operating systems\lab\experiment 3\main.c
+	<stdio.h>
+	<unistd.h>
+

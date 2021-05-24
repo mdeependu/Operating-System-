@@ -1,0 +1,148 @@
+#include<stdio.h>
+
+int main(){
+    int TQ=5;
+    int PID[]={1,2,3};
+    int At[]={0,0,0};
+    int ET[]={18,8,17};
+    int ETX[3];
+    int RT[6];
+    int CT[45];
+    
+    int j=0;
+    int l=0;
+    int y=0;
+    int t=0;
+    printf("ET: ");
+    for(int i=0;i<3;i++){
+        RT[i]=ET[i];
+        ETX[i]=ET[i];
+
+
+       printf("%d\n ",RT[i]);
+    }
+    
+
+    
+
+    
+
+
+
+
+    int ready[10];
+    int k=0;
+    int flag=0;
+    while(flag!=1){
+        
+         for(int j=0;j<3 ;j++,k++){
+            printf("k:%d ",k);
+            
+            
+            if(RT[0]==0 && RT[1]==0 && RT[2]==0){
+                flag=1;
+                break;
+            }    
+            else{ 
+                if(RT[j]>TQ){
+                    printf( "%d ",j);
+                    CT[k]=TQ;
+                    RT[j]=RT[j]-TQ;
+                    printf("iff :%d",RT[j]);
+                    ready[k]=PID[j];
+                    //ET[j]=ET[j]-TQ;
+                    
+                    //printf(" CT:%d\n",CT[k]);
+                }
+                else if(RT[j]==0){
+                    RT[j]=0;
+                    //printf( "%d",j);
+                    printf("%d ",j);
+                    printf("elif:%d",RT[j]);
+                    k--;
+                    
+                
+                }
+                else{
+                    printf( "%d ",j);
+                    
+                    
+                    CT[k]=RT[j];
+                    if(k==5){
+                        //printf(" RT OPERATION:%d \n",CT[5]); 
+                        printf("%d",j);  
+                        printf("%d",RT[0]); 
+                    }
+
+                    
+                    RT[j]=0;
+
+                    //if(k==5){
+                    //    printf(" OPERATION:%d \n",CT[5]);   
+                    //}
+                    
+                    printf("else:%d",RT[j]);
+                    ready[k]=PID[j];
+                    //printf("%d",ready[k]);
+                
+                    
+                    
+                    
+                }
+                
+            printf(" ARRAY AFTER OPERATION:%d  %d  %d \n",RT[0],RT[1],RT[2]);    
+            }
+        
+        
+        }
+    }
+    
+    printf("\nK %d",k);
+    printf("\nprocess: ");
+    for(int i=0;i<k;i++){
+       printf("p%d ",ready[i]);
+    }
+    printf("\n TIME:    ");
+    for(int i=0;i<k;i++,l++){
+        if (l==0){
+            printf("%d ",CT[l]);
+        }
+        else{
+            CT[l]=CT[l-1]+CT[l];
+
+            printf("%d ",CT[l]);
+        }
+    } 
+    int store[3];
+    for (int p=1;p<4;p++){
+        for(int j=k-1;j>=0;j--){
+            if(p==ready[j]){
+                store[p-1]=CT[j];
+                break;
+
+            }
+        }
+    }
+    printf("\nCT :");
+    for(int i=0;i<3;i++){
+        
+        printf(" %d ",store[i]);
+    }
+
+    int TAT[3],WT[3];
+    for (int a=0;a<3;a++){
+        TAT[a]=store[a]-At[a];
+        WT[a]=TAT[a]-ETX[a];
+    }
+    printf("\nET :");
+    for(int i=0;i<3;i++){
+        
+        printf(" %d ",ETX[i]);
+    }
+
+    int a=0;
+    printf("\nTAT: %d %d %d",TAT[a],TAT[a+1],TAT[a+2]);
+    printf("\nWT : %d %d %d",WT[a],WT[a+1],WT[a+2]);
+    
+return 0;
+}

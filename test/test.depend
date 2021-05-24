@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1600933099 source:c:\users\deependu mandal\desktop\test\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1601535389 source:c:\users\deependu mandal\desktop\semester 3\operating systems\lab\test\main.c
+	<stdio.h>
+	<stdlib.h>
+

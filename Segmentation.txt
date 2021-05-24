@@ -1,0 +1,51 @@
+#include<stdio.h>
+
+int main(){
+    int N_seg;
+    printf("enter the total number of segments :\n");
+    scanf("%d",&N_seg);
+
+    int segmentation[100][2];
+    int temp=0;
+    int address,limit;
+    //developer part
+    for(int i=0;i<N_seg;i++){
+        printf("enter the base address and limit\n");
+        scanf("%d %d",&segmentation[i][0],&segmentation[i][1]);
+        if(segmentation[i][0]>=temp){
+            
+            temp=segmentation[i][0]+segmentation[i][1];
+        }
+        else{
+            printf("invalid\n");
+            exit(0);
+            
+        }    
+
+    } 
+
+    int offset,segnumber;
+    // user
+    printf("user, pls enter the offset\n");
+    scanf("%d",&offset);
+    printf("enter the segment number\n");
+    scanf("%d",&segnumber);
+
+    int ans;
+    if(offset<=limit){
+        for(int i=0;i<N_seg;i++){
+            if(i==segnumber-1){
+                ans=segmentation[i][0]+offset;
+                printf("ANS:%d",ans);
+                break;
+            }
+        }
+    }
+    else{
+        printf("Ivalid: offset is greater than limit\n");
+    }
+
+
+
+
+}
